@@ -53,13 +53,15 @@ import { TopNavComponent } from './top-nav/top-nav.component';
 import { StudentsComponent } from './students/students.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ViewStudentComponent } from './students/view-student/view-student.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
-    StudentsComponent
+    StudentsComponent,
+    ViewStudentComponent
   ],
   imports: [
     FormsModule,
@@ -78,7 +80,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MatMenuModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDatepickerModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
