@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Student } from '../models/student.model';
 import { UpdateStudent } from '../models/update-student.model';
 
@@ -10,7 +11,7 @@ import { UpdateStudent } from '../models/update-student.model';
 export class StudentsService {
 
   //'https://localhost:44312/api/Student/Student';
-  private api = 'https://localhost:44312';
+  private api =  environment.api;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -39,5 +40,31 @@ export class StudentsService {
 
   deleteStudent(studentId: string): Observable<Student>{
     return this.httpClient.delete<Student>(this.api+"/api/student/"+studentId);
+  }
+
+  addStudent(studentDto:Student): Observable<Student>{
+    const createStudent: UpdateStudent = {
+      firstName: studentDto.firstName,
+      lastName: studentDto.lastName,
+      email: studentDto.email,
+      genderId: studentDto.genderId,
+      mobile: studentDto.mobile,
+      physicalAddress: studentDto.address.physicalAddress,
+      postalAddress: studentDto.address.postalAddress,
+      dateOfBirth: studentDto.dateOfBirth
+    }
+
+    return this.httpClient.post<Student>(this.api+"/api/student/add",createStudent);
+  }
+
+  uploadImage(studentId:string,file: File){
+    const formData = new FormData();
+    formData.append("profileImage",file);
+
+    return this.httpClient.post(this.api+ "/api/student/"+studentId+"/upload-image",formData,{responseType:"text"})
+  }
+
+  getImagePath(relativePath: string){
+    return `${this.api}/${relativePath}`
   }
 }

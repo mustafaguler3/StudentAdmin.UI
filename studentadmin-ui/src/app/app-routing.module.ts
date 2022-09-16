@@ -5,7 +5,7 @@ import { ViewStudentComponent } from './students/view-student/view-student.compo
 
 const routes: Routes = [
   {path:"",component: StudentsComponent},
-  {path:"students",component: StudentsComponent},
+  {path:"student",component: StudentsComponent},
   {path:"student/:id",component: ViewStudentComponent}
 ];
 
